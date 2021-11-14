@@ -81,11 +81,11 @@ $ sudo apt install libvirt-daemon-system libvirt-clients qemu-kvm qemu-utils vir
 Restart your machine and boot into BIOS. Enable a feature called `IOMMU`. You'll also need to enable CPU virtualization. For Intel processors, look for something called `VT-d`. For AMD, look for something called `AMD-Vi`. My motherboard is unique so I had to enable a feature called `SVM Mode`. Save any changes and restart the machine.
 
 Once you've booted into the host, make sure that IOMMU is enabled:
-`$ dmesg | grep IOMMU`
+`$ sudo dmesg | grep IOMMU`
 
 Also check that CPU virtualization is enabled:<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For Intel: `$ dmesg | grep VT-d` <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For AMD: `$ dmesg | grep AMD-Vi`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For Intel: `$ sudo dmesg | grep VT-d` <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For AMD: `$ sudo dmesg | grep AMD-Vi`
 
 Now you're going to need to pass the hardware-enabled IOMMU functionality into the kernel as a [kernel parameter](https://wiki.archlinux.org/index.php/kernel_parameters). For our purposes, it makes the most sense to enable this feature at boot-time. Depending on your boot-loader (i.e. grub, systemd, rEFInd), you'll have to modify a specific configuration file. Since my machine uses systemd and these configuration files are often overwritten on updates, I will be using a tool called [kernelstub](https://github.com/pop-os/kernelstub):
 
