@@ -197,8 +197,11 @@ kernelstub           : INFO     Configuration details:
    Install Loader configuration:..True
    Configuration version:.........3
 ```
-
-You can see that the "Kernel Image Path" and the "Initrd Image Path" are symbolic links that point to the old kernel and initrd.
+In my case "Kernel Image Path" and "Initrd Image Path" are symlinks. If thats not the case for you and those point to a specific kernel version use the following command to change the default boot kernel and initrd.
+```
+$ sudo kernelstub -v -k /boot/vmlinuz-5.3.0-acso -i /boot/initrd.img-5.3.0-acso
+```
+Otherwise change the symlink to the new kernel and initrd.
 
 ```
 $ ls -l /boot
